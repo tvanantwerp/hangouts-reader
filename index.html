@@ -215,8 +215,15 @@ You can view the source code <a href="https://github.com/Jessecar96/hangouts-rea
 		$('.txt').text('');
 		for(var event_id in Conversations[id]){
 			var convo_event = Conversations[id][event_id];
-			$('.txt').append(convo_event.sender + ": " + convo_event.message + "\n");
+			$('.txt').append(convo_event.sender + " on " + localDateString(convo_event.timestamp) + ": " + convo_event.message + "\n");
 		}
+	}
+
+	function localDateString(timestamp){
+		var date = new Date(parseInt(timestamp) / 1000);
+		var offset = new Date().getTimezoneOffset();
+		date.setMinutes(date.getMinutes() - offset);
+		return date.toUTCString() + (-offset / 60).toString();
 	}
 
 	</script>

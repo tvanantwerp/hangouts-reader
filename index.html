@@ -46,6 +46,25 @@
 		h3{
 			margin-top: 0;
 		}
+
+		table {
+		  table-layout: auto;
+		  width: 100%
+		}
+
+		td {
+			padding-right: 10px;
+			vertical-align: top;
+		}
+
+		.txt-message {
+			padding: 0;
+	    white-space: -o-pre-wrap;
+	    word-wrap: break-word;
+	    white-space: pre-wrap;
+	    white-space: -moz-pre-wrap;
+	    white-space: -pre-wrap;
+		}
 		</style>
 	</head>
 	<body>
@@ -212,10 +231,12 @@ You can view the source code <a href="https://github.com/Jessecar96/hangouts-rea
 	}
 
 	function switchConvo(id){
-		$('.txt').text('');
+		$('.txt').html('');
+		$('.txt').append('<table><thead><tr><th>Sender</th><th>Time</th><th>Message</th></tr></thead><tbody class="txt-table-body"></tbody></table>');
+		var convo_length = Conversations[id].length;
 		for(var event_id in Conversations[id]){
 			var convo_event = Conversations[id][event_id];
-			$('.txt').append(convo_event.sender + " on " + localDateString(convo_event.timestamp) + ": " + convo_event.message + "\n");
+			$('.txt-table-body').append('<tr><td>' + convo_event.sender + '</td><td>' + localDateString(convo_event.timestamp) + '</td><td class="txt-message">' + convo_event.message + '</td></tr>');
 		}
 	}
 
